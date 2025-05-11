@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/core.dart';
+import '../../cart/application/cart_provider.dart';
 import '../../common/presentation/cart_icon.dart';
 import '../../common/widgets/app_text.dart';
 import '../application/product_detail_provider.dart';
@@ -54,7 +54,8 @@ class PriceAndCartSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final product = ref.watch(productProvider);
-    final isIntoCart = useState<bool>(false);
+    final cartCount = ref.watch(currentProductCartCountProvider);
+    final isIntoCart = (cartCount > 0);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 14.w),
       child: Row(
@@ -71,16 +72,20 @@ class PriceAndCartSection extends HookConsumerWidget {
             ),
           ),
           Spacer(),
-          if (isIntoCart.value)
+          if (isIntoCart)
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(cartProvider.notifier).removeProduct(product);
+                  },
                   icon: Icon(Icons.remove),
                 ),
-                AppText('1'),
+                AppText('$cartCount'),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(cartProvider.notifier).addProduct(product);
+                  },
                   icon: Icon(Icons.add),
                 ),
               ],
@@ -93,7 +98,7 @@ class PriceAndCartSection extends HookConsumerWidget {
                 ),
               ),
               onPressed: () {
-                isIntoCart.value = !isIntoCart.value;
+                ref.read(cartProvider.notifier).addProduct(product);
               },
               child: Text('Add to Cart'),
             )
