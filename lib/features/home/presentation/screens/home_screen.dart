@@ -16,7 +16,6 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productsAsyncValue = ref.watch(homeProductsProvider);
     final refreshController = useMemoized(RefreshController.new);
 
     return Scaffold(
@@ -30,35 +29,14 @@ class HomeScreen extends HookConsumerWidget {
           ]);
           refreshController.refreshCompleted();
         },
-        child: Column(
+        child: ListView(
+          shrinkWrap: true,
           children: [
             SizedBox(
               height: 120.h,
               child: HomeCategorySection(),
             ),
-            Expanded(
-              child: productsAsyncValue.when(
-                data: (products) {
-                  return HomeProductSection(
-                    products: products,
-                  );
-                },
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, stackTrace) => Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Error loading products: $error'),
-                      SizedBox(height: 8.h),
-                      ElevatedButton(
-                        onPressed: () => ref.invalidate(homeProductsProvider),
-                        child: const Text('Retry'),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            HomeProductSection(),
           ],
         ),
       ),

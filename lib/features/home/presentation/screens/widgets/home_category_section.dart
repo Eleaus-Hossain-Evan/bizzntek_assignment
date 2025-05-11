@@ -87,7 +87,8 @@ class HomeCategorySection extends HookConsumerWidget {
                     3,
                     (index) => Bone(
                       width: 100,
-                      height: 40,
+                      height: 60,
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
                   ),
                 ),
