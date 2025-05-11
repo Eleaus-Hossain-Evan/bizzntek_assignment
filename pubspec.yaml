@@ -59,6 +59,7 @@ dependencies:
   talker: ^4.7.6
   icons_plus: ^5.0.0
   talker_dio_logger: ^4.7.6
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -117,3 +118,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/logo.png"
+  image_path_android: "assets/logo.png"
+  remove_alpha_ios: true
+  # web:
+  #   generate: true
+  #   image_path: "assets/common/app-icon.png"

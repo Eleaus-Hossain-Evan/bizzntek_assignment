@@ -146,10 +146,12 @@ class KTextFormField extends HookConsumerWidget {
                     onPressed: () {
                       hideText.value = !hideText.value;
                     },
-                    icon: hideText.value ? const Icon(Icons.lock_rounded) : const Icon(Icons.lock_open_rounded),
+                    icon: hideText.value
+                        ? const Icon(Icons.lock_rounded)
+                        : const Icon(Icons.lock_open_rounded),
                   )
                 : null),
-        suffix: suffix ?? (haveText.value && !isObscure ? Images.svgTick.assetSvg(width: 14.w, height: 14.h) : null),
+        suffix: suffix,
         suffixIconColor: AppColors.textSubtitle.withOpacity(.6),
       ),
       onTap: onTap,
@@ -338,35 +340,38 @@ class KTextFormField2 extends HookConsumerWidget {
       textInputAction: textInputAction,
       // expands: true,
       decoration: InputDecoration(
-          // contentPadding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 14.w),
-          hintText: hintText,
-          hintStyle: hintTextStyle,
-          labelText: labelText,
-          labelStyle: labelStyle,
-          floatingLabelStyle: floatingLabelStyle,
-          alignLabelWithHint: true,
-          // contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: 12.h),
-          border: border,
-          enabledBorder: haveText.value ? focusBorder : border,
-          focusedBorder: focusBorder,
-          disabledBorder: disabledBorder,
-          fillColor: fillColor,
-          filled: filled,
-          isDense: isDense,
-          focusColor: AppColors.primary,
-          prefixIcon: prefixIcon,
-          suffixText: suffixText,
-          suffixIcon: suffixIcon ??
-              (isObscure
-                  ? IconButton(
-                      // borderRadius: BorderRadius.circular(24.r),
-                      onPressed: () {
-                        hideText.value = !hideText.value;
-                      },
-                      icon: hideText.value ? const Icon(Icons.lock_rounded) : const Icon(Icons.lock_open_rounded),
-                    )
-                  : null),
-          suffix: suffix ?? (haveText.value && !isObscure ? Images.svgTick.assetSvg(width: 14.w, height: 14.h) : null)),
+        // contentPadding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 14.w),
+        hintText: hintText,
+        hintStyle: hintTextStyle,
+        labelText: labelText,
+        labelStyle: labelStyle,
+        floatingLabelStyle: floatingLabelStyle,
+        alignLabelWithHint: true,
+        // contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: 12.h),
+        border: border,
+        enabledBorder: haveText.value ? focusBorder : border,
+        focusedBorder: focusBorder,
+        disabledBorder: disabledBorder,
+        fillColor: fillColor,
+        filled: filled,
+        isDense: isDense,
+        focusColor: AppColors.primary,
+        prefixIcon: prefixIcon,
+        suffixText: suffixText,
+        suffixIcon: suffixIcon ??
+            (isObscure
+                ? IconButton(
+                    // borderRadius: BorderRadius.circular(24.r),
+                    onPressed: () {
+                      hideText.value = !hideText.value;
+                    },
+                    icon: hideText.value
+                        ? const Icon(Icons.lock_rounded)
+                        : const Icon(Icons.lock_open_rounded),
+                  )
+                : null),
+        suffix: suffix,
+      ),
       onTap: onTap,
       validator: validator,
       onFieldSubmitted: onFieldSubmitted,
@@ -421,7 +426,8 @@ class KTextFormField2 extends HookConsumerWidget {
             firstDate: DateTime(1950, 1, 1),
             lastDate: DateTime.now(),
             currentDate: DateTime.now(),
-            initialDate: controller!.text.isEmpty ? null : DateFormat(datePattern).parse(controller.text),
+            initialDate:
+                controller!.text.isEmpty ? null : DateFormat(datePattern).parse(controller.text),
           ).then((date) {
             controller.text = date == null ? '' : DateFormat(datePattern).format(date);
             onChanged?.call(date == null ? '' : DateFormat(datePattern).format(date));

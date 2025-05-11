@@ -4,6 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../features/home/domain/entity/product_entity.dart';
+import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/product_detail/application/product_detail_provider.dart';
+import '../../features/product_detail/presentation/product_detail_screen.dart';
 import '../core.dart';
 
 part 'router.g.dart';
@@ -21,7 +25,7 @@ GoRouter router(Ref ref) {
 
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/',
+    initialLocation: HomeScreen.route,
     // redirectLimit: 1,
     navigatorKey: AppGlobalKeys.mainNavigatorKey,
     // refreshListenable: auth,
@@ -29,7 +33,21 @@ GoRouter router(Ref ref) {
     observers: [
       BotToastNavigatorObserver(),
     ],
-    routes: [],
+    routes: [
+      GoRoute(
+        path: HomeScreen.route,
+        name: HomeScreen.route,
+        builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: ProductDetailScreen.route,
+        name: ProductDetailScreen.route,
+        builder: (context, state) => ProviderScope(
+          overrides: [productProvider.overrideWithValue(state.extra as ProductEntity)],
+          child: const ProductDetailScreen(),
+        ),
+      ),
+    ],
     redirect: (context, state) {
       // final token = ref.watch(tokenRepoRepoProvider).getAccessToken();
       // final authenticated = token != null && token.isNotEmpty;
