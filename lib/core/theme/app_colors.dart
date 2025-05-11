@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 // --bg-300:#bfc3c6;
 
 class AppColors {
-  static const primary = Color(0xFFB300B6);
+  static const primary = Color(0xFF970099);
   static const primary200 = Color(0xFFF684F8);
   static const primary300 = Color(0xFFF2C0F3);
 
