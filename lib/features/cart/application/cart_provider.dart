@@ -38,10 +38,25 @@ class Cart extends _$Cart {
     }
     state = [...cart];
   }
+
+  void clear() {
+    state = [];
+  }
 }
 
 @Riverpod(dependencies: [Cart])
 int totalCartCount(Ref ref) {
   final cart = ref.watch(cartProvider);
   return cart.fold(0, (previousValue, element) => previousValue + element.quantity);
+}
+
+@Riverpod(dependencies: [Cart])
+double totalCartPrice(Ref ref) {
+  final cart = ref.watch(cartProvider);
+  return cart.fold(0, (previousValue, e) => previousValue + (e.product.price * e.quantity));
+}
+
+@Riverpod(dependencies: [])
+CartEntity currentCart(Ref ref) {
+  throw UnimplementedError();
 }

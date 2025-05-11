@@ -75,14 +75,14 @@ class PriceAndCartSection extends HookConsumerWidget {
           if (isIntoCart)
             Row(
               children: [
-                IconButton(
+                IconButton.filledTonal(
                   onPressed: () {
                     ref.read(cartProvider.notifier).removeProduct(product);
                   },
                   icon: Icon(Icons.remove),
                 ),
                 AppText('$cartCount'),
-                IconButton(
+                IconButton.filledTonal(
                   onPressed: () {
                     ref.read(cartProvider.notifier).addProduct(product);
                   },

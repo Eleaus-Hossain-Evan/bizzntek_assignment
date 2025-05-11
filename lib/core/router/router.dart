@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../features/cart/presentation/cart_screen.dart';
 import '../../features/home/domain/entity/product_entity.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/product_detail/application/product_detail_provider.dart';
@@ -46,6 +47,11 @@ GoRouter router(Ref ref) {
           overrides: [productProvider.overrideWithValue(state.extra as ProductEntity)],
           child: const ProductDetailScreen(),
         ),
+      ),
+      GoRoute(
+        path: CartScreen.route,
+        name: CartScreen.route,
+        builder: (context, state) => const CartScreen(),
       ),
     ],
     redirect: (context, state) {
