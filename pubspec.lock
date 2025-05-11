@@ -554,6 +554,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
+  icons_plus:
+    dependency: "direct main"
+    description:
+      name: icons_plus
+      sha256: "8e2f601b8605d45dd55b106a0da084a1809125077a49574ca22e8bcd5b6e86f0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
   image:
     dependency: transitive
     description:
@@ -1071,6 +1079,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0+3"
+  talker:
+    dependency: "direct main"
+    description:
+      name: talker
+      sha256: "3d8b17976b9fe89436f23ac2b24642d62e170bc45e81943f2bdc309427ff9d0b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.7.6"
+  talker_dio_logger:
+    dependency: "direct main"
+    description:
+      name: talker_dio_logger
+      sha256: ef7643e6966993dcbbf1c1c0d3fcb8d8396f8c712e81819f603c46ecc7b1d270
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.7.6"
+  talker_logger:
+    dependency: transitive
+    description:
+      name: talker_logger
+      sha256: a77ce73f79e7cbd01c408683f3377090c0a0f1fa7c9716c06727dcd0713cfa24
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.7.6"
   term_glyph:
     dependency: transitive
     description:
