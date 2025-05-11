@@ -12,9 +12,9 @@ import 'package:flutter/material.dart';
 // --bg-300:#bfc3c6;
 
 class AppColors {
-  static const primary = Color(0xFF0897DD);
-  static const primary200 = Color(0xFF62c7ff);
-  static const primary300 = Color(0xFFd4ffff);
+  static const primary = Color(0xFFB300B6);
+  static const primary200 = Color(0xFFF684F8);
+  static const primary300 = Color(0xFFF2C0F3);
 
   static const secondary = Color(0xFFFFC107);
   static const secondary200 = Color(0xFF916400);

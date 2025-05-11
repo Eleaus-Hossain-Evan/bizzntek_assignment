@@ -1,7 +1,9 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/core.dart';
+import '../../../../common/presentation/cart_icon.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -24,17 +26,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Badge.count(
-            count: 0,
-            child: Icon(
-              Icons.shopping_cart_outlined,
-              size: 24.r,
-              color: AppColors.primary,
-            ),
-          ),
-        ),
+        CartIcon(),
       ],
     );
   }
