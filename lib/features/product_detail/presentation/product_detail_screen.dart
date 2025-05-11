@@ -16,87 +16,89 @@ class ProductDetailScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final product = ref.watch(productProvider);
-    final isIntoCart = useState<bool>(false);
+
     return Scaffold(
       appBar: AppBar(
         actions: [
           CartIcon(),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.w),
-            child: CachedNetworkImage(
-              imageUrl: product.image,
-              height: 300,
-              width: double.infinity,
-              fit: BoxFit.scaleDown,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(16.w),
+              child: CachedNetworkImage(
+                imageUrl: product.image,
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.scaleDown,
+              ),
             ),
-          ),
-          TitleAndDescriptionSection(),
-          8.verticalSpace,
-          RatingAndCategorySection(),
-          12.verticalSpace,
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.w),
-            child: Row(
-              children: [
-                AppText(
-                  'Price: ',
-                  style: context.textTheme.titleMedium?.setFontWeight(FontWeight.bold),
-                ),
-                AppText(
-                  '${product.price} \$',
-                  style: context.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-                Spacer(),
-                SizedBox(
-                  width: 100.w,
-                  height: 40,
-                  child: MaterialButton(
-                    onPressed: () {
-                      isIntoCart.value = !isIntoCart.value;
-                    },
-                    color: isIntoCart.value ? Colors.transparent : context.color.primary,
-                    textColor: isIntoCart.value ? context.color.primary : context.color.onPrimary,
-                    textTheme: ButtonTextTheme.accent,
-                    elevation: 0,
-                    focusElevation: 0,
-                    hoverElevation: 0,
-                    highlightElevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(
-                        color: context.color.primary,
-                      ),
-                    ),
-                    child: Text('Add to Cart'),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
+            TitleAndDescriptionSection(),
+            8.verticalSpace,
+            RatingAndCategorySection(),
+            12.verticalSpace,
+            PriceAndCartSection(),
+          ],
+        ),
       ),
-      bottomNavigationBar: isIntoCart.value
-          ? BottomAppBar(
-              child: SizedBox(
-                height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(onPressed: () {}, icon: Icon(Icons.exposure_minus_1)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.plus_one)),
-                  ],
+    );
+  }
+}
+
+class PriceAndCartSection extends HookConsumerWidget {
+  const PriceAndCartSection({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final product = ref.watch(productProvider);
+    final isIntoCart = useState<bool>(false);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 14.w),
+      child: Row(
+        children: [
+          AppText(
+            'Price: ',
+            style: context.textTheme.titleMedium?.setFontWeight(FontWeight.bold),
+          ),
+          AppText(
+            '${product.price} \$',
+            style: context.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+          Spacer(),
+          if (isIntoCart.value)
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.remove),
+                ),
+                AppText('1'),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.add),
+                ),
+              ],
+            )
+          else
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(
+                  color: context.color.primary,
                 ),
               ),
+              onPressed: () {
+                isIntoCart.value = !isIntoCart.value;
+              },
+              child: Text('Add to Cart'),
             )
-          : null,
+        ],
+      ),
     );
   }
 }

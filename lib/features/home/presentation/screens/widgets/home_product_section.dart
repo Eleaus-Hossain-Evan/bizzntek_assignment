@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/core.dart';
-import '../../../../common/widgets/k_cached_network_image.dart';
 import '../../../../product_detail/presentation/product_detail_screen.dart';
 import '../../../domain/entity/product_entity.dart';
 
@@ -54,9 +54,9 @@ class HomeProductSection extends StatelessWidget {
                     width: double.infinity,
                     color: Colors.grey.shade100, // Placeholder background for image area
                     child: product.image.isNotEmpty
-                        ? KCachedNetworkImageWdLoading(
+                        ? CachedNetworkImage(
                             imageUrl: product.image,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.scaleDown,
                           )
                         : Center(
                             child: Icon(
