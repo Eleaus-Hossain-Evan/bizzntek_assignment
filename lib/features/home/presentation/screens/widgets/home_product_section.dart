@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/core.dart';
 import '../../../../common/widgets/k_cached_network_image.dart';
+import '../../../../product_detail/presentation/product_detail_screen.dart';
 import '../../../domain/entity/product_entity.dart';
 
 class HomeProductSection extends StatelessWidget {
@@ -30,7 +32,13 @@ class HomeProductSection extends StatelessWidget {
       itemBuilder: (context, index) {
         final product = products[index];
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            // Navigate to product detail screen
+            context.pushNamed(
+              ProductDetailScreen.route,
+              extra: product,
+            );
+          },
           child: Card(
             elevation: 2,
             shape: RoundedRectangleBorder(
